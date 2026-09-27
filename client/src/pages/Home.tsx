@@ -15,7 +15,7 @@ import {
   Star,
 } from "lucide-react";
 
-const HOSTED_AUDIO_URL = "/we-fell-in-love-in-october.mp3";
+const HOSTED_AUDIO_URL = "/manus-storage/we-fell-in-love-in-october_63fae868.mp3";
 
 const blessings = [
   {
