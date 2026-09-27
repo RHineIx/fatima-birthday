@@ -32,7 +32,7 @@ const tinyRituals = [
   },
 ];
 
-const HOSTED_AUDIO_URL = "/manus-storage/we-fell-in-love-in-october_63fae868.mp3";
+const HOSTED_AUDIO_URL = "/we-fell-in-love-in-october.mp3";
 
 export default function Home() {
   const [letterOpen, setLetterOpen] = useState(false);
