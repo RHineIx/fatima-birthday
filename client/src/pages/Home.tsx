@@ -2,14 +2,13 @@ import { useRef, useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
-  ExternalLink,
   Heart,
   MailOpen,
   Music2,
+  Pause,
   Play,
   Sparkles,
   Star,
-  X,
 } from "lucide-react";
 
 const tinyRituals = [
@@ -37,18 +36,20 @@ const HOSTED_AUDIO_URL = "/manus-storage/we-fell-in-love-in-october_63fae868.mp3
 
 export default function Home() {
   const [letterOpen, setLetterOpen] = useState(false);
-  const [musicOpen, setMusicOpen] = useState(false);
   const [activeRitual, setActiveRitual] = useState(0);
-  const [audioUrl, setAudioUrl] = useState(HOSTED_AUDIO_URL);
-  const [audioName, setAudioName] = useState("we fell in love in october");
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const handleAudioUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    if (audioUrl) URL.revokeObjectURL(audioUrl);
-    setAudioUrl(URL.createObjectURL(file));
-    setAudioName(file.name);
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      await audio.play();
+      setIsPlaying(true);
+    } else {
+      audio.pause();
+      setIsPlaying(false);
+    }
   };
 
   const scrollToLetter = () => {
@@ -94,7 +95,7 @@ export default function Home() {
               افتحي الرسالة
               <ArrowDownRight size={17} strokeWidth={1.8} />
             </button>
-            <button className="text-button" onClick={() => setMusicOpen(true)}>
+            <button className="text-button" onClick={toggleMusic}>
               <Music2 size={16} />
               شغّلي الأغنية
               <ArrowUpRight size={14} />
@@ -126,7 +127,7 @@ export default function Home() {
               <span>FATIMA ONLY</span>
             </div>
             <div className="birthday-ticket__main">
-              <span className="birthday-ticket__small">a very important date</span>
+              <span className="birthday-ticket__small">01 october · birthday</span>
               <strong>YOUR<br />BIRTHDAY</strong>
               <div className="birthday-ticket__stamp">F<br /><small>♥</small></div>
             </div>
@@ -162,7 +163,7 @@ export default function Home() {
             <span className="letter__corner" aria-hidden="true" />
             <span className="letter__topline">
               <span>FROM: someone who thinks you're magic</span>
-              <span>27—09—∞</span>
+              <span>01—10—∞</span>
             </span>
             <span className="letter__seal" aria-hidden="true">F</span>
             {!letterOpen ? (
@@ -226,34 +227,14 @@ export default function Home() {
         </div>
       </footer>
 
-      <aside className={`music-dock ${musicOpen ? "music-dock--open" : ""}`} aria-label="Music player">
-        {musicOpen ? (
-          <div className="music-dock__expanded">
-            <div className="music-dock__head">
-              <div>
-                <span className="music-dock__eyebrow">the birthday soundtrack</span>
-                <strong>{audioName || "we fell in love in october"}</strong>
-                <span>girl in red · hosted for Fatima</span>
-              </div>
-              <button className="icon-button" onClick={() => setMusicOpen(false)} aria-label="Close music player"><X size={17} /></button>
-            </div>
-            {audioUrl ? (
-              <div className="music-uploaded">
-                <div className="music-uploaded__art"><Music2 size={28} /></div>
-                <audio className="music-audio" controls autoPlay src={audioUrl} />
-              </div>
-            ) : null}
-            <input ref={fileInputRef} className="sr-only" type="file" accept="audio/*" onChange={handleAudioUpload} />
-            {audioUrl && <button className="music-dock__change" onClick={() => fileInputRef.current?.click()}><ExternalLink size={13} /> تغيير الملف</button>}
-          </div>
-        ) : (
-          <button className="music-dock__collapsed" onClick={() => setMusicOpen(true)}>
-            <span className="music-dock__play"><Play size={15} fill="currentColor" /></span>
-            <span className="music-dock__equalizer" aria-hidden="true"><i /><i /><i /><i /></span>
-            <span><b>we fell in love in october</b><small>girl in red</small></span>
-            <Music2 size={17} />
-          </button>
-        )}
+      <aside className="music-dock" aria-label="Music player">
+        <audio ref={audioRef} src={HOSTED_AUDIO_URL} onEnded={() => setIsPlaying(false)} preload="metadata" />
+        <button className="music-dock__collapsed" onClick={toggleMusic} aria-label={isPlaying ? "Pause birthday song" : "Play birthday song"}>
+          <span className="music-dock__play">{isPlaying ? <Pause size={15} fill="currentColor" /> : <Play size={15} fill="currentColor" />}</span>
+          <span className="music-dock__equalizer" aria-hidden="true"><i /><i /><i /><i /></span>
+          <span><b>we fell in love in october</b><small>girl in red</small></span>
+          <Music2 size={17} />
+        </button>
       </aside>
     </main>
   );
