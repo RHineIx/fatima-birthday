@@ -15,19 +15,19 @@ const tinyRituals = [
   {
     index: "01",
     title: "soft chaos",
-    body: "أن تضحكي في اللحظة الخطأ، ثم تجعلينها اللحظة الصحيحة.",
+    body: "You laugh at the wrong moment, then somehow make it the right one.",
     accent: "pink",
   },
   {
     index: "02",
     title: "october light",
-    body: "فيكِ شيء يشبه آخر ضوء في يوم خريفي — دافئ، غريب، ولا يُنسى.",
+    body: "There is something about you that feels like the last light of an autumn day — warm, strange, unforgettable.",
     accent: "lime",
   },
   {
     index: "03",
     title: "keep this",
-    body: "هذه الصفحة صغيرة، لكن حبّها لكِ ليس كذلك.",
+    body: "This page is small, but the love inside it is not.",
     accent: "peach",
   },
 ];
@@ -87,17 +87,17 @@ export default function Home() {
             <span className="title-star" aria-hidden="true">✦</span>
           </h1>
           <p className="hero__lede">
-            ليست صفحة تهنئة عادية. إنها غرفة صغيرة على الإنترنت، مضاءة
-            بآخر شمس في أكتوبر، ومخبأ فيها شيء لكِ وحدكِ.
+            This is not an ordinary birthday page. It is a tiny room on the internet,
+            lit by the last sun of October, hiding something meant just for you.
           </p>
           <div className="hero__actions">
             <button className="button button--primary" onClick={scrollToLetter}>
-              افتحي الرسالة
+              Open the letter
               <ArrowDownRight size={17} strokeWidth={1.8} />
             </button>
             <button className="text-button" onClick={toggleMusic}>
               <Music2 size={16} />
-              شغّلي الأغنية
+              Play the song
               <ArrowUpRight size={14} />
             </button>
           </div>
@@ -150,7 +150,7 @@ export default function Home() {
         <div className="letter-intro">
           <p className="eyebrow"><span className="eyebrow__line" /> a secret, sort of</p>
           <h2 id="letter-heading">some things<br /><em>deserve</em> a little drama.</h2>
-          <p>اضغطي على الورقة. لا تقلقي، لا يوجد شيء محرج… تقريباً.</p>
+          <p>Tap the paper. Do not worry, there is nothing embarrassing… almost.</p>
         </div>
         <div className="letter-wrap">
           <button
@@ -176,9 +176,9 @@ export default function Home() {
               <span className="letter__open-copy">
                 <span className="letter__date">dear Fatima,</span>
                 <span className="letter__message">
-                  <b>كل عام وأنتِ الشيء الجميل الذي لا يحدث كل يوم.</b>
+                  <b>Happy birthday to the beautiful thing that does not happen every day.</b>
                   <br /><br />
-                  أتمنى أن تجدي في عامك الجديد أشخاصاً يرونكِ كما أنتِ تماماً: ضوءاً صغيراً، وفوضى لطيفة، وسبباً كافياً ليصبح اليوم العادي شيئاً يستحق التذكر.
+                  May your new year bring you people who see you exactly as you are: a little light, a gentle mess, and enough reason to make an ordinary day worth remembering.
                   <br /><br />
                   <i>stay weird. stay soft. stay yours.</i>
                 </span>
